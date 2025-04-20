@@ -1,4 +1,5 @@
-import markdownit, { Options, Renderer, Token } from 'markdown-it';
+import markdownit from 'markdown-it';
+import type { Options, Renderer, Token } from 'markdown-it';
 // @ts-ignore
 import imageFigures from 'markdown-it-image-figures';
 import { parse } from 'node-html-parser';

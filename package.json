@@ -2,7 +2,10 @@
   "name": "markdown-it-add-line-numbers",
   "version": "1.0.0",
   "description": "A plugin for markdown-it that adds line numbers to generated HTML",
-  "main": "src/index.ts",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "keywords": [
     "markdown",
     "markdown-it",
@@ -46,5 +49,8 @@
     "ts-node": "^10.9.2",
     "tsup": "^8.4.0",
     "typescript": "^5.8.2"
+  },
+  "peerDependencies": {
+    "markdown-it": "^14.0.0"
   }
 }
