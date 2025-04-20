@@ -3,7 +3,7 @@ import type {Config} from 'jest';
 const config: Config = {
   collectCoverage: true,
   passWithNoTests: true,
-  testRegex: 'src/.*\.test\.ts$',
+  testRegex: 'tests/.*\.test\.ts$',
   transform: {
     '^.+\\.ts?$': 'ts-jest'
   },

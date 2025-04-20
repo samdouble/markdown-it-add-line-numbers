@@ -6,9 +6,9 @@ import { parse } from 'node-html-parser';
 const parseHtmlBlockPlugin = (md: markdownit, level = 0) => {
   function parseHtmlBlock(tokens: Token[], idx: number, options: Options, env: any, slf: Renderer) {
     const parser = build_parser(level + 1);
-    console.log(parser.render('\n' + tokens[idx].content.replace(/\n/g, '\n\n') + '\n'));
+    // console.log(parser.render('\n' + tokens[idx].content.replace(/\n/g, '\n\n') + '\n'));
     const x = parse(parser.render('\n' + tokens[idx].content.replace(/\n/g, '\n\n') + '\n'));
-    console.log(x.range);
+    // console.log(x.range);
     return parser.render('\n' + tokens[idx].content.replace(/\n/g, '\n\n') + '\n');
   }
   md.renderer.rules.html_block = (tokens: Token[], idx: number, options: Options, env: any, slf: Renderer) => {
@@ -30,6 +30,7 @@ const addLineNumbers = (md: markdownit, level = 0) => {
   md.renderer.rules.blockquote_open = _addLineNumbers;
   md.renderer.rules.bullet_list_open = _addLineNumbers;
   md.renderer.rules.heading_open = _addLineNumbers;
+  md.renderer.rules.hr = _addLineNumbers;
   md.renderer.rules.link_open = _addLineNumbers;
   md.renderer.rules.list_item_open = _addLineNumbers;
   md.renderer.rules.ordered_list_open = _addLineNumbers;
