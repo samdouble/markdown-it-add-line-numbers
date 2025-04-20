@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/samdouble/markdown-it-add-line-numbers/compare/v1.0.0...v1.0.1) (2025-04-20)
+
+
+### Bug Fixes
+
+* add type: module in package.json ([e6fef15](https://github.com/samdouble/markdown-it-add-line-numbers/commit/e6fef1598ed7d0d8a708061c35491db55abee414))
+
 ## 1.0.0 (2025-04-20)
 
 

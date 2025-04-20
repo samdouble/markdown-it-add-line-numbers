@@ -1,6 +1,6 @@
 {
   "name": "markdown-it-add-line-numbers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A plugin for markdown-it that adds line numbers to generated HTML",
   "type": "module",
   "main": "dist/index.js",
