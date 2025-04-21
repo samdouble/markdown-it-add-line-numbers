@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/samdouble/markdown-it-add-line-numbers/compare/v1.0.1...v1.0.2) (2025-04-21)
+
+
+### Bug Fixes
+
+* export files as cjs format during build ([49988b6](https://github.com/samdouble/markdown-it-add-line-numbers/commit/49988b6f93cb66af6e635522c4d9bff727c1faa6))
+
 ## [1.0.1](https://github.com/samdouble/markdown-it-add-line-numbers/compare/v1.0.0...v1.0.1) (2025-04-20)
 
 
