@@ -2,21 +2,39 @@ import markdownit from 'markdown-it';
 import type { Options, Renderer, Token } from 'markdown-it';
 // @ts-ignore
 import imageFigures from 'markdown-it-image-figures';
-import { parse } from 'node-html-parser';
+import { HTMLElement, NodeType, parse } from 'node-html-parser';
 
 const parseHtmlBlockPlugin = (md: markdownit, level = 0) => {
   function parseHtmlBlock(tokens: Token[], idx: number, options: Options, env: any, slf: Renderer) {
+    function addLineNumbersToHtml(rootElement: HTMLElement, startLine: number) {
+      let currentLine = startLine;
+      let content = '';
+      for (const element of rootElement.childNodes) {
+        if (element.nodeType === NodeType.ELEMENT_NODE) {
+          (element as HTMLElement).setAttribute('data-source-line', String(currentLine));
+          const resAddLine = addLineNumbersToHtml(element as HTMLElement, currentLine);
+          currentLine = resAddLine.currentLine;
+          content += element.toString();
+        } else if (element.nodeType === NodeType.TEXT_NODE) {
+          const nbLineBreaks = (element.rawText.match(/\n/g) || []).length;
+          currentLine += nbLineBreaks;
+          content += element.toString();
+        } 
+      }
+      return { content, currentLine };
+    }
     const parser = build_parser(level + 1);
-    // console.log(parser.render('\n' + tokens[idx].content.replace(/\n/g, '\n\n') + '\n'));
-    const x = parse(parser.render('\n' + tokens[idx].content.replace(/\n/g, '\n\n') + '\n'));
-    // console.log(x.range);
+    const rootHtmlElement = parse(parser.render('\n' + tokens[idx].content.replace(/\n/g, '\n\n') + '\n'));
+    const { content } = addLineNumbersToHtml(rootHtmlElement, env.startLine);
     return parser.render('\n' + tokens[idx].content.replace(/\n/g, '\n\n') + '\n');
   }
   md.renderer.rules.html_block = (tokens: Token[], idx: number, options: Options, env: any, slf: Renderer) => {
-    return parseHtmlBlock(tokens, idx, options, env, slf);
+    const newEnv = tokens[idx].map ? { ...env, startLine: tokens[idx].map[0], endLine: tokens[idx].map[1] } : env;
+    return parseHtmlBlock(tokens, idx, options, newEnv, slf);
   };
   md.renderer.rules.html_inline = (tokens: Token[], idx: number, options: Options, env: any, slf: Renderer) => {
-    return parseHtmlBlock(tokens, idx, options, env, slf);
+    const newEnv = tokens[idx].map ? { ...env, startLine: tokens[idx].map[0], endLine: tokens[idx].map[1] } : env;
+    return parseHtmlBlock(tokens, idx, options, newEnv, slf);
   };
 };
 
