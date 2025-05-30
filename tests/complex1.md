@@ -11,11 +11,20 @@ A simple paragraph. With a few words.
   <p>Then a div with a paragraph.</p>
 </div>
 <div><p>Another one, but on one line.</p></div>
+Some random
+text on the first level
+<p>A paragraph</p>
 
 | Month    | Savings |
 | -------- | ------- |
 | January  | $250    |
 | February | $80     |
 | March    | $420    |
+
+```
+<div>
+  <p>A code block.</p>
+</div>
+```
 
 Good bye! See you soon.
